@@ -1,0 +1,10 @@
+Chapter 1: Percentages and Ratios
+A percentage is a number or ratio expressed as a fraction of 100.
+To find x% of y, calculate (x * y) / 100.
+
+Chapter 2: Time, Speed and Distance
+Speed is distance divided by time (S = D / T).
+When trains cross each other in opposite directions, add relative speeds.
+
+Chapter 3: Profit and Loss
+Profit = Selling Price - Cost Price. Profit percentage is calculated on Cost Price.

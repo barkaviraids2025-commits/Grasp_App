@@ -1,0 +1,519 @@
+/* =========================================================
+   GRASP — AI Learning Platform Design System
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f7f8fc;
+  --surface: #ffffff;
+  --surface-soft: #f1f3fa;
+
+  --text: #171827;
+  --text-soft: #686b7c;
+
+  --primary: #6757e8;
+  --primary-dark: #5141d1;
+  --accent: #38bdf8;
+  --leaf: #10b981;
+  --clay: #f97316;
+  --gold: #f59e0b;
+
+  --border: rgba(20, 20, 40, 0.08);
+
+  --shadow-sm: 0 4px 18px rgba(30, 30, 60, 0.06);
+  --shadow-md: 0 12px 35px rgba(30, 30, 70, 0.1);
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  --transition: 0.3s cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* =========================================================
+   ANIMATED BACKGROUND BLOBS
+   ========================================================= */
+
+.grasp-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.grasp-page::before,
+.grasp-page::after {
+  content: "";
+  position: fixed;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grasp-page::before {
+  top: -140px;
+  right: -100px;
+  background: var(--primary);
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+.grasp-page::after {
+  bottom: -140px;
+  left: -100px;
+  background: var(--accent);
+  animation: floatBlob 15s ease-in-out infinite reverse;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(35px, -30px) scale(1.1);
+  }
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 5%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo span {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary);
+  background: rgba(103, 87, 232, 0.08);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   GLASS CARDS
+   ========================================================= */
+
+.card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  position: relative;
+  z-index: 1;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(103, 87, 232, 0.22);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  padding: 13px 24px;
+  border-radius: 14px;
+  color: white !important;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary), #8174f2);
+  box-shadow: 0 8px 22px rgba(103, 87, 232, 0.28);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(103, 87, 232, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+  border-color: rgba(103, 87, 232, 0.2);
+}
+
+/* =========================================================
+   VOICE & ACTION BUTTONS
+   ========================================================= */
+
+.voice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(103, 87, 232, 0.25);
+  background: rgba(103, 87, 232, 0.08);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.voice-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.04);
+}
+
+/* =========================================================
+   CONCEPT CARDS
+   ========================================================= */
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.concept-card {
+  cursor: pointer;
+  position: relative;
+  padding: 22px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.concept-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(103, 87, 232, 0.3);
+}
+
+.concept-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(103, 87, 232, 0.1);
+  font-size: 22px;
+  margin-bottom: 14px;
+  transition: var(--transition);
+}
+
+.concept-card:hover .concept-icon {
+  transform: rotate(-8deg) scale(1.12);
+  background: rgba(103, 87, 232, 0.18);
+}
+
+/* =========================================================
+   UPLOAD BOX
+   ========================================================= */
+
+.upload-box {
+  border: 2px dashed rgba(103, 87, 232, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 48px 30px;
+  text-align: center;
+  background: linear-gradient(145deg, rgba(103, 87, 232, 0.05), rgba(56, 189, 248, 0.04));
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.upload-box:hover {
+  border-color: var(--primary);
+  background: linear-gradient(145deg, rgba(103, 87, 232, 0.1), rgba(56, 189, 248, 0.07));
+  transform: scale(1.01);
+}
+
+.upload-icon {
+  font-size: 44px;
+  margin-bottom: 14px;
+  display: inline-block;
+  animation: uploadFloat 3s ease-in-out infinite;
+}
+
+@keyframes uploadFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =========================================================
+   PROGRESS BARS
+   ========================================================= */
+
+.progress-container {
+  margin-top: 16px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 9px;
+  background: var(--surface-soft);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.badge {
+  width: 130px;
+  padding: 20px 12px;
+  text-align: center;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.badge:hover {
+  transform: translateY(-7px) rotate(-2deg);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(103, 87, 232, 0.3);
+}
+
+.badge-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+/* =========================================================
+   LEADERBOARD & TOASTS
+   ========================================================= */
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  transition: var(--transition);
+}
+
+.leaderboard-item:hover {
+  background: var(--surface-soft);
+  transform: translateX(5px);
+}
+
+.rank {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface-soft);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.success-toast {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  padding: 16px 22px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  animation: toastIn 0.5s ease forwards;
+  z-index: 999;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   AI THINKING ANIMATION
+   ========================================================= */
+
+.ai-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ai-thinking span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: thinking 1.2s infinite ease-in-out;
+}
+
+.ai-thinking span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.ai-thinking span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes thinking {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
